@@ -39,6 +39,44 @@ const getDinosaurs = async ({ response }: { response: any }) => {
     }
 }
 
+const fetchDinosaur = async ({ params, response }: { params: { id: string }, response:any }) => {
+    try{
+        await client.connect()
+
+        const result = await client.query("SELECT * FROM dinosaurs WHERE id = $1", params.id)
+        if (result.rows.toString() === ""){
+            response.status = 404
+            response.body = {
+                success: false,
+                msg: `Can't find dinosaur with provided ID ${params.id}`
+            }
+            return;
+        }else {
+            const dino: any = new Object()
+            result.rows.map(p => {
+                result.rowDescription.columns.map((el:any, i:any) => {
+                    dino[el.name] = p[i]
+                })
+            })
+
+            response.body = {
+                success: true,
+                data: dino
+            }
+        }
+    }catch(err) {
+        response.status = 500
+        response.body = {
+            success: false,
+            msg: err.toString()
+        }
+    }finally {
+        await client.end()
+    }
+}
+
+
+
 const addDinosaur = async ({ request, response }: { request: any, response: any }) => {    
     const body = await request.body()
     const dino = body.value 
@@ -78,4 +116,60 @@ const addDinosaur = async ({ request, response }: { request: any, response: any 
     }
 }
 
-export { getDinosaurs, addDinosaur }
+
+const updateDinosaur = async ({ params, request, response }: {params: { id: string }, request: any, response: any }) => {
+
+    await fetchDinosaur({ params: {"id": params.id }, response})
+
+    if (response.status === 404){
+        response.body = {
+            success: false,
+            msg: response.body.msg
+        }
+
+        response.status = 404
+        return
+   }else {
+       const body = await request.body()
+       const dino = body.value
+
+       if (!request.body){
+           response.status = 400
+           response.body = {
+               success: false,
+               msg: 'No data'
+           }
+       }else{
+           try{
+               await client.connect()
+
+               const result = await client.query("UPDATE dinosaurs SET name=$1, description=$2, weight=$3, length=$4, type=$5, environment=$5",
+               dino.name,
+               dino.description,
+               dino.weight,
+               dino.length,
+               dino.type,
+               dino.environment
+               )
+
+               response.status = 200
+               response.body = {
+                   success: true,
+                   data: dino
+               }
+           } catch (err) {
+               response.status = 500
+               response.body = {
+                   success: false,
+                   msg: err.toString()
+               }
+           } finally{
+               await client.end()
+           }
+       }
+   }
+
+
+}
+
+export { getDinosaurs, addDinosaur, fetchDinosaur, updateDinosaur }
