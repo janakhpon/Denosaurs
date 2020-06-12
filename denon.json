@@ -9,7 +9,10 @@
       "desc": "run my index.ts file",
       "allow": [
         "env",
-        "net"
+        "net",
+        "write",
+        "read",
+        "run"
       ],
       "env": {
         "PORT": "5000"

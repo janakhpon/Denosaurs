@@ -1,9 +1,9 @@
 const DBCreds = {
-    user: "testuser",
-    database: "testDB",
-    password: "testpassword",
-    hostname: "localhost",
-    port: 5432
+    user: "",
+    database: "",
+    password: "",
+    hostname: "",
+    port: 10
 }
 
 export { DBCreds }

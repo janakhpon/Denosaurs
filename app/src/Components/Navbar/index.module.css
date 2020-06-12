@@ -1,0 +1,6 @@
+body,
+html {
+  overflow: hidden !important;
+  background-color: #46494c !important;
+  color: whitesmoke !important;
+}
