@@ -3,7 +3,7 @@ const DBCreds = {
     database: "",
     password: "",
     hostname: "",
-    port: 10
+    port: 
 }
 
 export { DBCreds }
