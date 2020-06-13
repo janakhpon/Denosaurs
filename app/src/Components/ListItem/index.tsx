@@ -1,15 +1,8 @@
 import React, { StatelessComponent, useState } from 'react'
-import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box'
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import axios from 'axios'
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Button, Grid, Box, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import * as go from '../../Constants'
 import { SerRep, ServerData, Dinosaur } from '../../Types'
@@ -21,10 +14,10 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         padding: theme.spacing(2),
         margin: theme.spacing(1),
-        background: 'transparent',
+        background: '#222222',
     },
     btn: {
-        backgroundColor: '#bf1a2f',
+        backgroundColor: '#44d62c ',
         color: '#ffffff',
         margin: theme.spacing(2),
     },
@@ -144,9 +137,14 @@ const PageListItem: StatelessComponent<any> = ({ dino }) => {
 
     return (
         <>
-            <Grid container spacing={1}>
+            <Grid container spacing={1} className={styles.listItem}>
                 <Grid item xs={8}>
-                    <h4>{dino.name}</h4>
+                    <h3 className={styles.nameHightlight}>{dino.name}</h3>
+                    <p>Description: {dino.description}</p>
+                    <p>Enviroment: {dino.environment}</p>
+                    <Link className={styles.linkstyle}>
+                        <span> view more</span>
+                    </Link>
                 </Grid>
                 <Grid item xs={4}>
                     <Box display="flex" flexDirection="row-reverse" p={1} m={1}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, MouseEvent } from 'react'
+import React, { useEffect, useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import TextField from '@material-ui/core/TextField'
@@ -18,13 +18,13 @@ import styles from './index.module.scss'
 
 const useStyles = makeStyles({
     btn: {
-        backgroundColor: '#bf1a2f',
+        backgroundColor: '#44d62c ',
         color: '#ffffff',
         margin: 2
     },
 
     btn1: {
-        backgroundColor: '#02c39a',
+        backgroundColor: '#44d62c ',
         color: '#ffffff',
         margin: 2,
     },
@@ -65,7 +65,6 @@ const useStyles = makeStyles({
 
 function PageListForm() {
     const classes = useStyles()
-    const dinoContext = useContext(DinoContext)
     const [open, setOpen] = useState(false)
     const [name, setName] = useState<String>("")
     const [description, setDescription] = useState<String>("")
@@ -81,19 +80,16 @@ function PageListForm() {
                 method: 'post',
                 url: go.MAIN_URL,
                 data: data,
-                headers: { 'Content-Type': 'application/json'},
+                headers: { 'Content-Type': 'application/json' },
             })
             console.log(suc)
             if (suc) {
                 const getData = async () => {
-                    let data = await axios.request<any>({
+                    await axios.request<any>({
                         method: 'get',
                         url: go.MAIN_URL
                     })
-
-                    
                 }
-
                 try {
                     getData()
                 } catch (err) { }
@@ -162,54 +158,49 @@ function PageListForm() {
                 <DialogContent className={classes.Dialogcontent}>
                     <Grid container direction="row" spacing={2}>
                         <Grid item xs={12}>
-                        <TextField id="input-with-icon-grid" label="Name |" fullWidth
+                            <TextField id="input-with-icon-grid" label="Name |" fullWidth
                                 InputProps={{ className: classes.underline }} InputLabelProps={{ className: classes.formLabel }} className={styles.searchbox}
                                 value={name}
                                 name="name"
-                                onChange={(e) => setName(e.target.value)}  />
+                                onChange={(e) => setName(e.target.value)} />
 
-                        <TextField id="input-with-icon-grid" label="Description |" fullWidth
+                            <TextField id="input-with-icon-grid" label="Description |" fullWidth
                                 InputProps={{ className: classes.underline }} InputLabelProps={{ className: classes.formLabel }} className={styles.searchbox}
                                 value={description}
                                 name="description"
                                 onChange={(e) => setDescription(e.target.value)} />
 
-                        <TextField id="input-with-icon-grid" fullWidth
+                            <TextField id="input-with-icon-grid" label="Weight |" fullWidth
                                 InputProps={{ className: classes.underline }} InputLabelProps={{ className: classes.formLabel }} className={styles.searchbox}
                                 value={weight}
                                 name="weight"
                                 onChange={(e) => setWeight(+e.target.value)} />
 
-                        <TextField id="input-with-icon-grid" fullWidth
+                            <TextField id="input-with-icon-grid" label="Length |" fullWidth
                                 InputProps={{ className: classes.underline }} InputLabelProps={{ className: classes.formLabel }} className={styles.searchbox}
                                 value={length}
                                 name="length"
                                 onChange={(e) => setLength(+e.target.value)} />
 
-                        <TextField id="input-with-icon-grid" label="Type |" fullWidth
+                            <TextField id="input-with-icon-grid" label="Type |" fullWidth
                                 InputProps={{ className: classes.underline }} InputLabelProps={{ className: classes.formLabel }} className={styles.searchbox}
-                                value={type} 
-                                onChange={(e) => setType(e.target.value)} 
-                                />
-                               
-                        <TextField id="input-with-icon-grid" label="Environment |" fullWidth
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
+                            />
+
+                            <TextField id="input-with-icon-grid" label="Environment |" fullWidth
                                 InputProps={{ className: classes.underline }} InputLabelProps={{ className: classes.formLabel }} className={styles.searchbox}
-                                value={environment} 
-                                onChange={(e) => setEnvironment(e.target.value)} 
-                                />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Button onClick={addDeno} color="primary" className={classes.btn}>
-                                SAVE
-                            </Button>
+                                value={environment}
+                                onChange={(e) => setEnvironment(e.target.value)}
+                            />
                         </Grid>
                     </Grid>
                 </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose} color="primary" className={classes.btn}>
-                            CANCEL
-                        </Button>
-                    </DialogActions>
+                <DialogActions>
+                    <Button onClick={addDeno} color="primary" className={classes.btn}>
+                        SAVE
+                            </Button>
+                </DialogActions>
             </Dialog>
         </>
     )

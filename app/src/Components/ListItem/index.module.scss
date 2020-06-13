@@ -5,3 +5,36 @@
 .delbtn {
     cursor: pointer;
 }
+
+
+.listItem {
+    background-color: #222222 !important;
+    color: white !important;
+    padding: 0.2rem;
+    margin: 0.2rem;
+    border: .1rem solid #111111;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+
+.linkstyle {
+    text-decoration: none;
+    color: #888888 !important;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+}
+
+.linkstyle:hover {
+    color: #44d62c !important;
+    font-size: 1em;
+    font-weight: bolder;
+    transition: 0.5s;
+}
+
+
+a{
+    text-decoration: none !important;
+    cursor: pointer;
+}

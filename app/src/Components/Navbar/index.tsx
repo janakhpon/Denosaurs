@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import './index.scss'
 // import styles from './index.module.scss'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,7 +34,7 @@ export default function Navbar() {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <AppBar position="static" style={{ background: "transparent", boxShadow: 'none' }}>
+            <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none', color: '#ffffff' }}>
                 <Toolbar variant="dense">
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                         <MenuIcon />
